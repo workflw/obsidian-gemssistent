@@ -1,0 +1,281 @@
+/* Gemini Assistant Plugin – Styles */
+
+/* Chat Container */
+.gemini-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 14px;
+}
+
+/* Header */
+.gemini-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+}
+
+.gemini-header-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.gemini-header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.gemini-clear-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.gemini-session-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+  overflow-x: auto;
+}
+
+.gemini-session-tab {
+  font-size: 11px;
+  padding: 2px 8px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.gemini-session-tab.is-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+.gemini-clear-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+/* Modell-Info */
+.gemini-model-info {
+  font-size: 10px;
+  color: var(--text-faint);
+  padding: 2px 12px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* Messages */
+.gemini-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gemini-message {
+  max-width: 90%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.gemini-message-user {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+
+.gemini-message-assistant {
+  background: var(--background-secondary);
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.gemini-message-content {
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Markdown in Assistent-Nachrichten */
+.gemini-message-assistant .gemini-message-content p {
+  margin: 4px 0;
+}
+
+.gemini-message-assistant .gemini-message-content ul,
+.gemini-message-assistant .gemini-message-content ol {
+  margin: 4px 0;
+  padding-left: 16px;
+}
+
+.gemini-message-assistant .gemini-message-content code {
+  font-size: 12px;
+  background: var(--background-primary);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.gemini-message-assistant .gemini-message-content pre {
+  background: var(--background-primary);
+  padding: 8px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+.gemini-message-time {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.gemini-loading {
+  opacity: 0.7;
+}
+
+/* Input-Bereich */
+.gemini-input-container {
+  padding: 10px;
+  border-top: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gemini-context-row {
+  display: flex;
+  align-items: center;
+}
+
+.gemini-context-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gemini-attach-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gemini-attach-btn {
+  font-size: 11px;
+  padding: 3px 8px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.gemini-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.gemini-attachment-chip {
+  font-size: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gemini-input {
+  width: 100%;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-normal);
+  padding: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.gemini-input:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.2);
+}
+
+.gemini-send-btn {
+  width: 100%;
+  padding: 7px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.gemini-send-btn:hover {
+  opacity: 0.9;
+}
+
+.gemini-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Modal */
+.gemini-modal-selection-preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--background-secondary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  border-left: 3px solid var(--interactive-accent);
+  margin-bottom: 10px;
+}
+
+.gemini-modal-input {
+  width: 100%;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-normal);
+  padding: 8px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.gemini-modal-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}

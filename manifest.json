@@ -1,0 +1,11 @@
+{
+  "id": "gemini-assistant",
+  "name": "Gemini Assistant",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Use Gemini CLI in Obsidian with chat sessions, note attachments, vault context, and controlled file editing.",
+  "author": "Sebastian Bogener",
+  "authorUrl": "",
+  "fundingUrl": "",
+  "isDesktopOnly": true
+}
