@@ -52,7 +52,7 @@ var GeminiSettingTab = class extends import_obsidian.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "Gemini Assistant \u2013 Einstellungen" });
+    containerEl.createEl("h2", { text: "Gemssistent \u2013 Einstellungen" });
     containerEl.createEl("h3", { text: "\ud83d\udd10 Authentifizierung" });
     new import_obsidian.Setting(containerEl).setName("Auth-Methode").setDesc("Empfohlen: Gemini CLI (nutzt deinen bereits eingeloggten Google-Account)").addDropdown((drop) => drop.addOption("cli", "\ud83d\udfe2 Gemini CLI (empfohlen)").addOption("apikey", "\ud83d\udd11 API Key (Google AI Studio)").setValue(this.plugin.settings.authMethod || "cli").onChange(async (value) => {
       this.plugin.settings.authMethod = value;
@@ -1295,9 +1295,9 @@ ${noteContext}
    */
   async chatViaCli(userMessage, history, noteContext) {
     let fullPrompt = this.settings.systemPrompt + "\n\n";
-    fullPrompt += "Du arbeitest im Obsidian-Vault des Nutzers. Wenn der Nutzer dich bittet, Dateien zu erstellen oder zu ändern, arbeite mit relativen Vault-Pfaden, ändere gezielt und fasse geänderte Dateien am Ende kurz zusammen. Frage bei potenziell destruktiven Aktionen vorher nach.\n\n";
+    fullPrompt += "Du arbeitest im Obsidian-Vault des Nutzers. Wenn der Nutzer dich bittet, Dateien zu erstellen oder zu Ã¤ndern, arbeite mit relativen Vault-Pfaden, Ã¤ndere gezielt und fasse geÃ¤nderte Dateien am Ende kurz zusammen. Frage bei potenziell destruktiven Aktionen vorher nach.\n\n";
     if (noteContext && this.settings.includeVaultContext) {
-      fullPrompt += "--- OBSIDIAN-KONTEXT / ANGEHÄNGTE DATEIEN ---\n" + noteContext + "\n--- ENDE KONTEXT ---\n\n";
+      fullPrompt += "--- OBSIDIAN-KONTEXT / ANGEHÃ„NGTE DATEIEN ---\n" + noteContext + "\n--- ENDE KONTEXT ---\n\n";
     }
     const prevHistory = history.filter((_, i) => i < history.length - 1);
     if (prevHistory.length > 0) {
@@ -1391,7 +1391,7 @@ var AttachedFileSuggestModal = class extends import_obsidian2.FuzzySuggestModal 
   constructor(app, onChoose) {
     super(app);
     this.onChoose = onChoose;
-    this.setPlaceholder("Markdown-Datei zum Anhängen wählen...");
+    this.setPlaceholder("Markdown-Datei zum AnhÃ¤ngen wÃ¤hlen...");
   }
   getItems() {
     return this.app.vault.getMarkdownFiles();
@@ -1417,7 +1417,7 @@ var GeminiChatView = class extends import_obsidian2.ItemView {
     return GEMINI_CHAT_VIEW_TYPE;
   }
   getDisplayText() {
-    return "Gemini Assistant";
+    return "Gemssistent";
   }
   getIcon() {
     return "bot";
@@ -1430,7 +1430,7 @@ var GeminiChatView = class extends import_obsidian2.ItemView {
     container.empty();
     container.addClass("gemini-chat-container");
     const header = container.createDiv("gemini-header");
-    header.createEl("span", { text: "\u2728 Gemini Assistant", cls: "gemini-header-title" });
+    header.createEl("span", { text: "\u2728 Gemssistent", cls: "gemini-header-title" });
     const headerActions = header.createDiv("gemini-header-actions");
     const newBtn = headerActions.createEl("button", { text: "+ Chat", cls: "gemini-clear-btn" });
     newBtn.onclick = () => this.newChat();
@@ -1533,7 +1533,7 @@ var GeminiChatView = class extends import_obsidian2.ItemView {
     if (!this.attachedFiles.includes(file.path)) {
       this.attachedFiles.push(file.path);
       this.renderAttachments();
-      new import_obsidian2.Notice(`Datei angehängt: ${file.path}`);
+      new import_obsidian2.Notice(`Datei angehÃ¤ngt: ${file.path}`);
     }
   }
   removeAttachment(path) {
@@ -1544,7 +1544,7 @@ var GeminiChatView = class extends import_obsidian2.ItemView {
     if (!this.attachmentsEl) return;
     this.attachmentsEl.empty();
     for (const path of this.attachedFiles) {
-      const chip = this.attachmentsEl.createEl("button", { text: `× ${path}`, cls: "gemini-attachment-chip" });
+      const chip = this.attachmentsEl.createEl("button", { text: `Ã— ${path}`, cls: "gemini-attachment-chip" });
       chip.onclick = () => this.removeAttachment(path);
     }
   }
@@ -1689,11 +1689,11 @@ var GoogleAuthManager = class {
   }
   async login() {
     if (!this.plugin.settings.oauthClientId) {
-      new import_obsidian3.Notice("⚠️ Bitte zuerst die OAuth Client ID in den Einstellungen eintragen.");
+      new import_obsidian3.Notice("âš ï¸ Bitte zuerst die OAuth Client ID in den Einstellungen eintragen.");
       return;
     }
     try {
-      new import_obsidian3.Notice("🔐 Google-Login wird gestartet...");
+      new import_obsidian3.Notice("ðŸ” Google-Login wird gestartet...");
       const port = await this.findFreePort();
       const redirectUri = "http://127.0.0.1:" + port;
       const state = Math.random().toString(36).substring(2, 15);
@@ -1716,10 +1716,10 @@ var GoogleAuthManager = class {
       const code = await this.waitForCallback(port, state);
       await this.exchangeCode(code, codeVerifier, redirectUri);
       await this.fetchUserInfo();
-      new import_obsidian3.Notice("✅ Eingeloggt als " + this.plugin.settings.oauthEmail);
+      new import_obsidian3.Notice("âœ… Eingeloggt als " + this.plugin.settings.oauthEmail);
       if (this.plugin.settingTab) this.plugin.settingTab.display();
     } catch (error) {
-      new import_obsidian3.Notice("❌ Login fehlgeschlagen: " + error.message);
+      new import_obsidian3.Notice("âŒ Login fehlgeschlagen: " + error.message);
       console.error("Gemini OAuth Fehler:", error);
     }
   }
@@ -1734,15 +1734,15 @@ var GoogleAuthManager = class {
           const error = url.searchParams.get("error");
           res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
           if (error) {
-            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>❌ Login abgebrochen</h2><p>Du kannst dieses Fenster schlie\xDFen und zu Obsidian zur\xFCckkehren.</p></body></html>");
+            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>âŒ Login abgebrochen</h2><p>Du kannst dieses Fenster schlie\xDFen und zu Obsidian zur\xFCckkehren.</p></body></html>");
             server.close();
             reject(new Error("Login abgebrochen: " + error));
           } else if (code && state === expectedState) {
-            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>✅ Login erfolgreich!</h2><p>Kehre zu Obsidian zur\xFCck. Dieses Fenster kann geschlossen werden.</p></body></html>");
+            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>âœ… Login erfolgreich!</h2><p>Kehre zu Obsidian zur\xFCck. Dieses Fenster kann geschlossen werden.</p></body></html>");
             server.close();
             resolve(code);
           } else {
-            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>⚠️ Ung\xFCltige Antwort</h2></body></html>");
+            res.end("<html><body style='font-family:sans-serif;padding:40px;text-align:center'><h2>âš ï¸ Ung\xFCltige Antwort</h2></body></html>");
             server.close();
             reject(new Error("Ung\xFCltige OAuth-Antwort"));
           }
@@ -1831,7 +1831,7 @@ var GoogleAuthManager = class {
       this.plugin.settings.oauthEmail = "";
       this.plugin.settings.authMethod = "apikey";
       await this.plugin.saveSettings();
-      new import_obsidian3.Notice("⚠️ Google-Session abgelaufen. Bitte erneut einloggen.");
+      new import_obsidian3.Notice("âš ï¸ Google-Session abgelaufen. Bitte erneut einloggen.");
       if (this.plugin.settingTab) this.plugin.settingTab.display();
       return null;
     }
@@ -1848,7 +1848,7 @@ var GoogleAuthManager = class {
     this.plugin.settings.oauthTokenExpiry = 0;
     this.plugin.settings.authMethod = "apikey";
     await this.plugin.saveSettings();
-    new import_obsidian3.Notice("👋 Erfolgreich ausgeloggt.");
+    new import_obsidian3.Notice("ðŸ‘‹ Erfolgreich ausgeloggt.");
     if (this.plugin.settingTab) this.plugin.settingTab.display();
   }
   isLoggedIn() {
@@ -1922,7 +1922,7 @@ var GeminiPlugin = class extends import_obsidian3.Plugin {
     );
     this.settingTab = new GeminiSettingTab(this.app, this);
     this.addSettingTab(this.settingTab);
-    this.addRibbonIcon("bot", "Gemini Assistant \xF6ffnen", () => {
+    this.addRibbonIcon("bot", "Gemssistent \xF6ffnen", () => {
       this.activateChatView();
     });
     this.addCommand({
@@ -1974,10 +1974,10 @@ var GeminiPlugin = class extends import_obsidian3.Plugin {
       name: "Von Google ausloggen",
       callback: () => this.authManager.logout()
     });
-    console.log("Gemini Assistant Plugin geladen \u2705");
+    console.log("Gemssistent Plugin geladen \u2705");
   }
   onunload() {
-    console.log("Gemini Assistant Plugin entladen");
+    console.log("Gemssistent Plugin entladen");
   }
   // --- Chat-Sidebar ---
   async activateChatView() {
@@ -2021,7 +2021,7 @@ var GeminiPlugin = class extends import_obsidian3.Plugin {
       const summaryPath = `${(_b = (_a = activeFile.parent) == null ? void 0 : _a.path) != null ? _b : ""}/${summaryFileName}`;
       const summaryContent = `# Zusammenfassung: ${activeFile.basename}
 
-> Erstellt von Gemini Assistant am ${(/* @__PURE__ */ new Date()).toLocaleDateString("de-DE")}
+> Erstellt von Gemssistent am ${(/* @__PURE__ */ new Date()).toLocaleDateString("de-DE")}
 > Quelle: [[${activeFile.basename}]]
 
 ${summary}
@@ -2197,3 +2197,4 @@ ${result}
    * limitations under the License.
    *)
 */
+

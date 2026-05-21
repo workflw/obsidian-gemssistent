@@ -1,6 +1,6 @@
-﻿# Gemini Assistant for Obsidian
+# Gemssistent for Obsidian
 
-Gemini Assistant is an Obsidian desktop plugin that connects to the local Gemini CLI and provides a Codex-like chat workflow inside your vault.
+Gemssistent is an Obsidian desktop plugin that connects to the local Gemini CLI and provides a Codex-like chat workflow inside your vault.
 
 ## Features
 
@@ -38,7 +38,7 @@ Before using it on important vaults:
 
 ## Manual installation
 
-Copy these files into your vault under `.obsidian/plugins/gemini-assistant/`:
+Copy these files into your vault under `.obsidian/plugins/gemssistent/`:
 
 - `main.js`
 - `manifest.json`
@@ -54,4 +54,5 @@ Official Obsidian releases must attach exactly these files to each GitHub releas
 - `manifest.json`
 - `styles.css`
 
-The GitHub release tag must match the `version` in `manifest.json`, for example `1.0.0`.
+The GitHub release tag must match the `version` in `manifest.json`, for example `1.0.1`.
+
